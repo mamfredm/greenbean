@@ -255,7 +255,7 @@ async function handleSubmit(event) {
           timestamp: new Date().toISOString()
       };
 
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbxMhV_rpYqngWZy5ruGnWIjTXhGYerHmPM1XWefArFj7R5IykvJBF3A1_vQaSinIRPI/exec';
+      const scriptURL = 'https://script.google.com/macros/s/AKfycby5N1KqzwFgFe7lWx-ma78ge2gAl6YJ3_Fla1o9VO3UlJse8D173DwEKGp5FvTvhkI/exec';
 
       // Daten als JSON senden
       const response = await fetch(scriptURL, {
