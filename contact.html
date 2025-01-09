@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Green Bean - Kontaktieren Sie uns für Fragen und Anregungen.">
+    <meta name="keywords" content="contact, green bean, cannabis cooking, contact form">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <title>Green Bean - Kontakt</title>
+    
+    <!-- Your existing favicon links here -->
+</head>
+<body>
+    <header>
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="#start" class="logo" aria-label="Green Bean Home">Green Bean</a>
+            <button class="menu-icon" aria-label="Toggle menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="menu" role="menu">
+                <li role="none"><a href="#cooking" role="menuitem">Kochen mit Cannabis</a></li>
+                <li role="none"><a href="infos.html" role="menuitem">Infos</a></li>
+                <li role="none"><a href="infos.html#Zubereitung" role="menuitem">Zubereitungsmethoden</a></li>
+                <li role="none"><a href="grundrezepte.html" role="menuitem">Grundrezepte</a></li>
+                <li role="none"><a href="#rechner1" role="menuitem">Canna Rechner</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="start">
+        <h1>Kontaktiere <span class="green-bean">Green Bean</span></h1>
+        <p>Wir freuen uns auf deine Nachricht!</p>
+    </section>
+
+    <section id="contact-form">
+        <h2>Schreib uns eine Nachricht</h2>
+        <p>Hast du Fragen oder Anregungen? Wir sind für dich da!</p>
+        
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Betreff</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Deine Nachricht</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Nachricht senden</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="mailto:hello@greenbean.whf.bz">hello@greenbean</a>
+            </div>
+            <div class="col-md-4">
+                <p class="copyright">&copy; 2024 Green Bean</p>
+            </div>
+            <div class="col-md-4">
+                <a href="policy.html">Policy & Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -224,3 +224,76 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
+// Verbesserter Code für die Kontaktformular-Verarbeitung mit JSON
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.getElementById('contactForm');
+  
+  if (contactForm) {
+      contactForm.addEventListener('submit', handleSubmit);
+  }
+});
+
+async function handleSubmit(event) {
+  event.preventDefault();
+  
+  // Loading-Status anzeigen
+  const submitButton = event.target.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.textContent;
+  submitButton.textContent = 'Wird gesendet...';
+  submitButton.disabled = true;
+
+  try {
+      // Formulardaten direkt als JSON-Objekt sammeln
+      const formData = new FormData(event.target);
+      const data = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+          timestamp: new Date().toISOString()
+      };
+
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxMhV_rpYqngWZy5ruGnWIjTXhGYerHmPM1XWefArFj7R5IykvJBF3A1_vQaSinIRPI/exec';
+
+      // Daten als JSON senden
+      const response = await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+          },
+          // Daten als JSON-String senden
+          body: JSON.stringify(data)
+      });
+
+      showMessage('Vielen Dank für deine Nachricht! Wir melden uns zeitnah bei dir.', 'success');
+      event.target.reset();
+
+  } catch (error) {
+      console.error('Error:', error);
+      showMessage('Es gab einen Fehler beim Senden deiner Nachricht. Bitte versuche es später erneut.', 'error');
+  } finally {
+      submitButton.textContent = originalButtonText;
+      submitButton.disabled = false;
+  }
+}
+
+function showMessage(message, type) {
+  const existingMessage = document.querySelector('.form-message');
+  if (existingMessage) {
+      existingMessage.remove();
+  }
+
+  const messageElement = document.createElement('div');
+  messageElement.className = `form-message ${type}`;
+  messageElement.textContent = message;
+
+  const form = document.getElementById('contactForm');
+  form.parentNode.insertBefore(messageElement, form);
+
+  setTimeout(() => {
+      messageElement.remove();
+  }, 5000);
+}
