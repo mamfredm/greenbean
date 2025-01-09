@@ -1,242 +1,176 @@
-/* 
-  Dieses CSS-Dokument ist für die Gestaltung einer Website zum Thema Cannabutter. 
-  Es ist in verschiedene Abschnitte unterteilt, um die Lesbarkeit und Wartbarkeit zu verbessern.
+/* Custom Properties */
+:root {
+  --color-primary: #6aa84f;
+  --color-primary-dark: #4CAF50;
+  --color-secondary: #38761d;
+  --color-text: #333;
+  --color-text-light: #777;
+  --color-white: #fff;
+  --color-background: #f0f0f0;
+  --color-background-alt: #e9e9e9;
+  --color-background-card: #fbfbfbc3;
+  --color-border: #ddd;
+  --color-error: #cc0000;
+}
 
-  Inhaltsverzeichnis:
-  1. Allgemeine Styles
-  2. Header
-  3. Start Section
-  4. Abschnitte
-  5. Infos
-  6. Zubereitung
-  7. Grundrezepte
-  8. Canna Butter Rechner Section
-  9. Rechner Styling
-  10. Button Styling
-  11. Footer
-*/
-
-/* 1. Allgemeine Styles */
-body {
-  font-family: 'Nunito', sans-serif;
+/* Base & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* 2. Header */
-header {
-  background-color: #fff;
-  padding: 20px; 
-  display: flex; 
-  align-items: center; 
-  position: fixed;
-  top: 0;
-  left: 0; /* Vereinfacht von left: 0% */
-  right: 0; /* Vereinfacht von right: 0px */
-  width: 98%;
-  z-index: 100;
-  overflow-x: visible; 
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
-/* Logo Styling */
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Navigation & Header - Updated Section */
+header {
+  background-color: var(--color-white);
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 98%;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .logo {
   font-size: 24px;
   font-weight: bold;
-  color: #6aa84f; 
-  text-decoration: none; 
-  padding-left: 15px;
+  color: var(--color-primary);
+  text-decoration: none;
+  margin-left: 15px;
+  position: relative;
+  padding: 5px 0;
 }
 
-/* Menü Styling */
+.logo::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover::after {
+  transform: scaleX(1);
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.menu a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.menu a:hover {
+  color: var(--color-primary);
+}
+
+.menu a:hover::after {
+  transform: scaleX(1);
+}
+
 .menu-icon {
-  display: none; 
+  display: none;
   cursor: pointer;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
 .bar {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #333;
+  background-color: var(--color-text);
   margin: 5px 0;
 }
 
-/* Menü für größere Bildschirme */
-@media (min-width: 768px) { 
-  nav { 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .menu {
-    display: flex; 
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .menu li {
-    margin-left: 30px; 
-  }
-
-  nav a {
-    color: inherit;
-    text-decoration: none;
-    position: relative;
-  }
-
-  nav a::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #4CAF50;
-    transition: width 0.3s ease-in-out;
-  }
-
-  nav a:hover::before {
-    width: 100%;
-  }
-
-  /* Hover-Effekte */
-  .Butterundoil div:hover,
-  .zubereitungsmethoden div:hover {
-    background: #f5f5f5;
-    transform: translateY(-7px); /* Korrigiert von -07px */
-  }
-
-  .Butterundoil div:hover h5,
-  .zubereitungsmethoden div:hover h5 {
-    color: #76bd57;
-  }
-
-  .Butterundoil div:hover a,
-  .zubereitungsmethoden div:hover a {
-    color: #fff;
-  }
-}
-
-/* Menü für kleinere Bildschirme */
-@media (max-width: 767px) {
-  header { 
-    height: 70px;
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    width: 100%;
-    padding: 1px;
-  }
-
-  nav { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .menu-icon {
-    display: block;
-    margin-left: auto;
-    padding-right: 15px;
-    
-  }
-
-  .menu {
-    display: none;
-    flex-direction: row; /* Initial als Reihe anzeigen */
-    position: absolute;
-    top: 70px;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border:  #6aa84f; /* Kurzschreibweise für border-color, border-style */
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .menu li {
-    border-bottom: 1px solid #6aa84f; /*  Eine leichte Umrandung */
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #fff;
-    color: #4CAF50;
-    font-weight: bold;
-    width: auto;
-  }
-
-  nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .menu.show { 
-    display: flex; 
-    flex-direction: column; /* Bei Bedarf als Spalte anzeigen */
-  }
-  /* Footer */
-  footer a {
-    color: #fff;
-    text-decoration: none;
-    margin-bottom: 20px;
-  }
-
-  .col-md-4 {
-    width: 100%; /* Auf kleinen Bildschirmen volle Breite */
-    margin-bottom: 20px;
-    text-decoration: none;
-  }
-}
-/* 3. Start Section */
-#start {
-  background-color: #f0f0f0; 
-  text-align: center;
-  color: #333; 
-  padding: 150px 20px;
-}
-
-#start h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-#start h1 .green-bean { 
-  color: #6aa84f; 
-}
-
-/* 4. Abschnitte */
+/* Sections */
 section {
   padding: 80px 20px;
   text-align: center;
 }
 
-/* cooking */
-#cooking {
-  background-color: #f9f9f9;
+#start {
+  background-color: var(--color-background);
+  padding-top: 150px;
 }
 
-/* 5. Infos */
-#infos,#infoshonig  {
-  background-color: #e9e9e9;
+#cooking {
+  background-color: var(--color-background);
+}
+
+#infos, #infoshonig {
+  background-color: var(--color-background-alt);
   padding: 30px;
   padding-top: 70px;
 }
 
-.Butterundoil, .honig {
+/* Cards & Grid Layouts */
+.Butterundoil, .honig, .zubereitungsmethoden {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 40px;
   margin-top: 50px;
-  padding: 0; /* Vereinfacht von padding: 0px */
+  padding: 0;
 }
 
-.Butterundoil div, .honig div{
-  background: #fbfbfbc3;
+.Butterundoil div, .honig div, .zubereitungsmethoden div {
+  background: var(--color-background-card);
   padding: 40px;
   font-size: 13px;
   font-weight: 300;
@@ -254,123 +188,32 @@ section {
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 15px;
-  color: #6aa84f;
+  color: var(--color-primary);
 }
 
-.benefit-name {
-  font-weight: bold;
-  
+.Butterundoil div:hover, .honig div:hover, .zubereitungsmethoden div:hover {
+  background: #f5f5f5;
+  transform: translateY(-7px);
 }
 
-.benefits-green {
-  color: #1c1c1c;
-}
-
-
-
-/* 6. Zubereitung */
-#Zubereitung {
-  background-color: #e9e9e9;
-  padding: 30px;
-  padding-top: 70px;
-}
-
-.zubereitungsmethoden {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 40px;
-  margin-top: 50px;
-  padding: 0; /* Vereinfacht von padding: 0px */
-}
-
-.zubereitungsmethoden div {
-  background: #fbfbfbc3;
-  padding: 40px;
-  font-size: 13px;
-  font-weight: 300;
-  border-radius: 15px;
-  transition: background 0.5s, transform 0.5s;
-}
-
-.zubereitungsmethoden div h4 {
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.zubereitungsmethoden div h5 {
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  color: #6aa84f;
-}
-
-.call  {
-  padding-top: 30px;
-  width: auto;
-}
-/* 7. Grundrezepte */
-#grundrezepte, #butter-sektion { 
-  background-color: #e5e5e5; 
-}
-
-.grundrezepte, .butter-sektion {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 40px;
-  margin-top: 0px;
-  padding: 30px 0;
-}
-
-.grundrezepte div {
-  background: #fbfbfbc3;
-  padding: 40px;
-  font-size: 13px;
-  font-weight: 300;
-  border-radius: 15px;
-  transition: background 0.5s, transform 0.5s;
-}
-
-.grundrezepte div h4 {
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.grundrezepte div h5 {
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  color: #6aa84f;
+.Butterundoil div:hover h5, .zubereitungsmethoden div:hover h5 {
+  color: #76bd57;
 }
 
 .bild-zubereitung {
-  width: 50px; /* Passe die Größe nach Bedarf an */
+  width: 50px;
+  margin-bottom: 16px;
 }
-#rezeptfilter {
-  background-color: #e5e5e5
 
-}
+/* Filter Menu */
 .filter-menu {
   width: auto;
-  margin: 0 auto;
+  margin: 16px auto;
   display: flex;
-  justify-content: center; /* Zentriert horizontal */
-  border-radius: 20px;
-} /* Correctly placed closing brace */
-
-#oel-filter {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  min-width: 200px;
-  max-width: 80%;
-  text-align: center;
-  color: #fff;
-  background-color: #4CAF50;
-  border-radius: 20px;
+  justify-content: center;
 }
 
+#oel-filter,
 #zubereitung-filter {
   padding: 10px;
   font-size: 16px;
@@ -378,42 +221,56 @@ section {
   min-width: 200px;
   max-width: 80%;
   text-align: center;
-  color: #fff;
-  background-color: #4CAF50;
+  color: var(--color-white);
+  background-color: var(--color-primary);
   border-radius: 20px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
 }
 
-
-/* 8. Canna Butter Rechner Section */
-#rechner1 {
-  background-color: #f9f9f9;
-  padding: 40px;
-  padding-top: 70px;
+#oel-filter::-ms-expand,
+#zubereitung-filter::-ms-expand {
+  display: none;
 }
 
-#rechner2 { /* Kombiniert die Styles für #rechner1 und #rechner2 */
-  background-color: #f9f9f9;
-  padding: 40px;
-  padding-top: -100px;
+#oel-filter:hover,
+#zubereitung-filter:hover {
+  background-color: var(--color-primary-dark);
 }
 
-/* 9. Rechner Styling */
-.container {
-  width: 90%; 
-  max-width: 400px; 
-  margin: 0 auto;
-  margin-top: 40px;
-  padding: 20px;
-  border: 1px solid #6aa84f;
-  border-radius: 15px;
-  text-align: center;
+/* Buttons */
+.berechnen-button,
+.rezept-button,
+.info-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: medium;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  min-width: 200px;
+  max-width: 80%;
+  margin-top: 20px;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
+.berechnen-button:hover,
+.rezept-button:hover,
+.info-button:hover {
+  background-color: var(--color-primary-dark);
 }
 
+/* Calculator Form Elements */
 input[type="number"],
 input[type="range"] {
   width: 100%;
@@ -425,14 +282,12 @@ input[type="range"] {
 
 input[type="range"] {
   -webkit-appearance: none;
-  appearance: none;  
-  width: 100%;
+  appearance: none;
   height: 5px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity .2s; /* Vereinfacht von -webkit-transition */
+  background: var(--color-border);
   border-radius: 5px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -440,122 +295,82 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 20px;
   height: 20px;
-  background: #4CAF50;
-  cursor: pointer;
+  background: var(--color-primary);
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .slider-value {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  color: #777;
+  font-size: 13px;
+  color: var(--color-text-light);
 }
 
-.slider-description {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 5px;
+/* Typography */
+h1, h2, h3, h4, h5 {
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 36px;
+  color: var(--color-text);
+  margin-bottom: 20px;
 }
 
 h2 {
-  color: #4CAF50;
-  text-align: center;
+  color: var(--color-primary);
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 h3 {
-  color: #576154 !important; /* Vermeiden Sie wenn möglich !important */
-  margin-top: 20px;
-  text-align: center;
+  color: var(--color-primary);
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
-/* Styling für die Ergebnisboxen */
-#ergebnis-box1, 
-#ergebnis-box2 { /* Kombiniert die Styles */
-  background-color: #ffffff !important; /* Vermeiden Sie wenn möglich !important */
-  border: 2px solid #6aa84f !important; /* Vermeiden Sie wenn möglich !important */
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+h4 {
+  color: var(--color-text);
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
 
-#ergebnis-box1 p, 
-#ergebnis-box2 p { /* Kombiniert die Styles */
-  margin: 10px 0;
-  font-size: 16px;
-  color: #333;
+h5 {
+  color: var(--color-primary);
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
 
-#ergebnis-box1 span, 
-#ergebnis-box2 span { /* Kombiniert die Styles */
+.green-bean { 
+  color: var(--color-primary); 
+}
+
+.benefits-green {
+  color: var(--color-primary);
+}
+
+.benefit-name { 
   font-weight: bold;
-  padding-left: 5px;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
-/* 10. Button Styling */
-
-/* Allgemeine Button Styles (zuerst definieren) */
-.rezept-button,
-.rechner-button,
-.info-button,
-.berechnen-button {
-  background-color: #4CAF50;  
-  color: white !important; /* Vermeiden Sie wenn möglich !important */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: medium;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  width: auto;
-  min-width: 200px;
-  max-width: 80%;
-}
-
-.rezept-button:link, 
-.rezept-button:visited,
-.rezept-button:hover,
-.rezept-button:active,
-.info-button:link,
-.info-button:visited,
-.info-button:hover,
-.info-button:active,
-.rechner-button:link,
-.rechner-button:visited,
-.rechner-button:hover,
-.rechner-button:active,
-.berechnen-button:link,
-.berechnen-button:visited,
-.berechnen-button:hover,
-.berechnen-button:active {
-  color: white;
-  text-decoration: none;
-}
-
-/* Individuelle Button Styles */
-.rezept-button {
-  margin-bottom: 10%; 
-  margin-top: 20px;
-}
-
-.rechner-button {
-  margin: 20px auto;
-  margin-bottom: 5%;
-}
-
-.berechnen-button {
-  margin: 20px auto; 
-}
-
-/* 11. Footer */
+/* Footer */
 footer {
-  background-color: #6aa84f;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 32px;
   text-align: center;
-  padding: 20px;
+}
+
+footer a {
+  color: var(--color-white);
+  text-decoration: none;
+  margin-bottom: 20px;
 }
 
 .row {
@@ -564,13 +379,82 @@ footer {
   justify-content: space-between;
 }
 
-footer a {
-  color: #fff;
-  text-decoration: none;
-  margin-top: 25px;
-}
+/* Media Queries */
+@media (max-width: 767px) {
+  header {
+    height: 70px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 1px;
+  }
 
-.col-md-4 {
-  margin-top: 25px;
-  text-decoration: none; 
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .menu-icon {
+    display: block;
+    margin-left: auto;
+    padding-right: 15px;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu.show {
+    display: flex;
+  }
+
+  .menu li {
+    width: 100%;
+    border-bottom: 1px solid rgba(106, 168, 79, 0.1);
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .menu a {
+    display: block;
+    padding: 15px;
+  }
+
+  .menu a::after {
+    display: none;
+  }
+
+  .menu a:hover {
+    background-color: rgba(106, 168, 79, 0.1);
+  }
+
+  .Butterundoil, .honig, .zubereitungsmethoden {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #oel-filter,
+  #zubereitung-filter {
+    width: 90%;
+    max-width: 300px;
+  }
+  
+  .col-md-4 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
