@@ -46,7 +46,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  width: 98%;
+  width: 100%;
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
