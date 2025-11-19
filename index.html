@@ -7,211 +7,28 @@
     <title>Green Bean - Cooking with Benefits</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons via Lucide (als Ersatz für lokale Bilder im Preview) -->
+    <!-- Externe CSS Datei einbinden -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons via Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        /* --- CSS VARIABLEN & RESET --- */
-        :root {
-            --primary: #6aa84f;
-            --primary-dark: #4CAF50;
-            --secondary: #38761d;
-            --text: #333;
-            --text-light: #666;
-            --bg: #f8f9fa;
-            --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --radius: 12px;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        
-        body {
-            font-family: 'Nunito', sans-serif;
-            color: var(--text);
-            background-color: var(--bg);
-            line-height: 1.6;
-        }
-
-        img { max-width: 100%; height: auto; }
-        
-        /* --- TYPOGRAFIE --- */
-        h1, h2, h3 { line-height: 1.2; margin-bottom: 1rem; }
-        h1 { font-size: 2.5rem; font-weight: 700; }
-        h2 { font-size: 2rem; color: var(--secondary); text-align: center; margin-bottom: 2rem; }
-        h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
-        p { margin-bottom: 1rem; color: var(--text-light); }
-        
-        .highlight { color: var(--primary); }
-        .text-center { text-align: center; }
-
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--white);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-        .btn:hover { background: var(--secondary); transform: translateY(-2px); }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: var(--white); }
-
-        /* --- HEADER & NAV --- */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
-        
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        
-        .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            text-align: center;
-            padding: 6rem 1.5rem;
-            background: linear-gradient(135deg, #f0f9eb 0%, #ffffff 100%);
-        }
-        .hero-content { max-width: 800px; margin: 0 auto; }
-        .hero-subtitle { font-size: 1.25rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem; display: block; }
-
-        /* --- SECTIONS GENERAL --- */
-        section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-        
-        /* --- INFOS GRID --- */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-            border-top: 4px solid var(--primary);
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card-icon { color: var(--primary); margin-bottom: 1rem; }
-
-        /* --- RECIPE TABS --- */
-        .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .tab-btn {
-            background: var(--white);
-            border: 1px solid #ddd;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-        .tab-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
-        
-        .recipe-content { display: none; animation: fadeIn 0.5s; }
-        .recipe-content.active { display: block; }
-        
-        .method-card {
-            background: var(--white);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: var(--radius);
-            border-left: 4px solid var(--secondary);
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* --- CALCULATOR --- */
-        .calculator-wrapper {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .calc-group { margin-bottom: 1.5rem; }
-        .calc-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; }
-        .slider-container { display: flex; align-items: center; gap: 1rem; }
-        input[type="range"] { flex-grow: 1; accent-color: var(--primary); }
-        input[type="number"] { 
-            width: 80px; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-weight: bold;
-        }
-        
-        .result-box {
-            background: #f0f9eb;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            margin-top: 2rem;
-            text-align: center;
-            border: 1px solid var(--primary);
-        }
-        .result-value { font-size: 2rem; font-weight: 800; color: var(--secondary); }
-
-        /* --- CONTACT FORM --- */
-        .contact-form { max-width: 600px; margin: 0 auto; }
-        .form-control { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
-        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(106, 168, 79, 0.2); }
-
-        /* --- FOOTER --- */
-        footer { background: var(--text); color: var(--white); padding: 3rem 1.5rem; margin-top: 4rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
-        .footer-links a { color: #aaa; text-decoration: none; display: block; margin-bottom: 0.5rem; }
-        .footer-links a:hover { color: var(--white); }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            .nav-links.active { display: flex; }
-            .menu-toggle { display: block; }
-            h1 { font-size: 2rem; }
-        }
-    </style>
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
         <nav>
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i data-lucide="sprout"></i> Green Bean
             </a>
             <button class="menu-toggle" aria-label="Menu">
                 <i data-lucide="menu"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="#infos">Wissen</a></li>
-                <li><a href="#rezepte">Rezepte</a></li>
+                <li><a href="basiswissen.html">Wissen</a></li>
+                <li><a href="grundrezepte.html">Rezepte</a></li>
                 <li><a href="#calculator">Rechner</a></li>
-                <li><a href="#contact">Kontakt</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
             </ul>
         </nav>
     </header>
@@ -223,127 +40,121 @@
             <h1>Entdecke die Kunst des <span class="highlight">Cannabis-Kochens</span></h1>
             <p>Lerne, wie du Cannabisbutter und Cannabis-Öl sicher, lecker und präzise dosiert selbst herstellst.</p>
             <div style="margin-top: 2rem;">
-                <a href="#rezepte" class="btn">Zu den Rezepten</a>
+                <a href="grundrezepte.html" class="btn">Zu den Rezepten</a>
                 <a href="#calculator" class="btn btn-outline" style="margin-left: 10px;">Zum Rechner</a>
             </div>
         </div>
     </section>
 
-    <!-- INFOS / WISSEN -->
+    <!-- WERBEPLATZ 1: LEADERBOARD (Nach Hero) -->
+    <!-- Ideal für breite Banner (728x90) -->
+    <div class="ad-slot ad-leaderboard ad-label">
+        <span>Anzeige / Leaderboard</span>
+    </div>
+
+    <!-- INFOS / WISSEN TEASER -->
     <section id="infos">
         <h2>Basiswissen</h2>
         <div class="info-grid">
             <!-- Card 1 -->
-            <div class="card">
+            <a href="basiswissen.html" class="card" style="text-decoration: none; color: inherit;">
                 <div class="card-icon"><i data-lucide="flame" size="32"></i></div>
                 <h3>Decarboxylierung</h3>
-                <p>Das A und O. Ohne Hitze keine Wirkung. Lerne, warum du dein Gras erst "backen" musst, bevor du es kochst.</p>
-            </div>
+                <p>Das A und O. Ohne Hitze keine Wirkung. Lerne, warum du dein Gras erst "backen" musst.</p>
+                <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Mehr erfahren &rarr;</span>
+            </a>
+            
             <!-- Card 2 -->
-            <div class="card">
+            <a href="basiswissen.html" class="card" style="text-decoration: none; color: inherit;">
                 <div class="card-icon"><i data-lucide="droplets" size="32"></i></div>
                 <h3>Butter vs. Öl</h3>
-                <p>Butter schmeckt cremiger, Kokosöl ist potenter und vegan. Wähle den richtigen Fettträger für dein Gericht.</p>
-            </div>
+                <p>Butter schmeckt cremiger, Kokosöl ist potenter. Wähle den richtigen Fettträger.</p>
+                <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Mehr erfahren &rarr;</span>
+            </a>
+            
             <!-- Card 3 -->
-            <div class="card">
+            <a href="basiswissen.html" class="card" style="text-decoration: none; color: inherit;">
                 <div class="card-icon"><i data-lucide="chef-hat" size="32"></i></div>
                 <h3>Zubereitung</h3>
-                <p>Ob Sous-Vide, Slow Cooker oder Kochtopf - wir zeigen dir die Vor- und Nachteile jeder Methode.</p>
-            </div>
+                <p>Ob Sous-Vide, Slow Cooker oder Kochtopf - wir zeigen dir die Vor- und Nachteile.</p>
+                <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Mehr erfahren &rarr;</span>
+            </a>
         </div>
     </section>
 
-    <!-- REZEPTE (Mit Tabs) -->
-    <section id="rezepte">
-        <h2>Grundrezepte</h2>
-        <p class="text-center" style="margin-bottom: 2rem;">Wähle deine Basis:</p>
-        
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab('butter')">Butter</button>
-            <button class="tab-btn" onclick="openTab('kokos')">Kokosöl</button>
-            <button class="tab-btn" onclick="openTab('oliven')">Olivenöl</button>
-        </div>
-
-        <!-- BUTTER CONTENT -->
-        <div id="butter" class="recipe-content active">
-            <h3>Cannabutter - Der Klassiker</h3>
-            <p>Perfekt für Brownies, Cookies und zum Verfeinern.</p>
+    <!-- REZEPTE TEASER -->
+    <section id="rezepte" style="background-color: #f0f9eb; width: 100%; max-width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h2>Grundrezepte</h2>
+            <p class="text-center" style="margin-bottom: 2rem;">Die Basis für jedes Edible. Wähle deinen Favoriten:</p>
             
-            <div class="method-card">
-                <h4><i data-lucide="thermometer"></i> Methode 1: Kochtopf (Klassisch)</h4>
-                <ol style="margin-left: 1.5rem; margin-top: 1rem;">
-                    <li>Gras zerkleinern und decarboxylieren (30-40 Min bei 110°C im Ofen).</li>
-                    <li>Wasser und Butter im Topf schmelzen.</li>
-                    <li>Gras hinzufügen und 3-4 Stunden bei niedriger Temperatur (nicht kochen!) ziehen lassen.</li>
-                    <li>Durch ein Tuch abseihen und im Kühlschrank fest werden lassen.</li>
-                    <li>Wasser abgießen. Fertig!</li>
-                </ol>
-            </div>
-            <div class="method-card">
-                <h4><i data-lucide="watch"></i> Methode 2: Sous-Vide (Profi)</h4>
-                <p>Vakuumiere Butter und Gras. Gare es im Wasserbad bei 85°C für 4 Stunden. Geruchsneutral und extrem potent.</p>
-            </div>
-        </div>
+            <div class="info-grid">
+                <a href="grundrezepte.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="card-icon"><i data-lucide="cookie" size="32"></i></div>
+                    <h3>Cannabutter</h3>
+                    <p>Der Klassiker für Gebäck.</p>
+                    <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Zum Rezept &rarr;</span>
+                </a>
+                
+                <a href="grundrezepte.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="card-icon"><i data-lucide="leaf" size="32"></i></div>
+                    <h3>Canna-Kokosöl</h3>
+                    <p>Vegan, potent und haltbar.</p>
+                    <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Zum Rezept &rarr;</span>
+                </a>
 
-        <!-- KOKOS CONTENT -->
-        <div id="kokos" class="recipe-content">
-            <h3>Canna-Kokosöl - Vegan & Potent</h3>
-            <p>Durch den hohen Fettgehalt absorbiert Kokosöl Cannabinoide besonders gut.</p>
-            <div class="method-card">
-                <h4>Zubereitung</h4>
-                <p>Ähnlich wie bei Butter, aber oft ohne Wasserzusatz im Wasserbad (Bain-Marie) herzustellen, um Anbrennen zu vermeiden.</p>
-                <p><strong>Tipp:</strong> Füge einen Löffel Sojalecithin hinzu, um die Aufnahme im Körper zu verbessern.</p>
-            </div>
-        </div>
-
-        <!-- OLIVEN CONTENT -->
-        <div id="oliven" class="recipe-content">
-            <h3>Canna-Olivenöl - Das Mediterrane</h3>
-            <p>Ideal für Salate, Pasta und Dips. Nicht zu hoch erhitzen!</p>
-            <div class="method-card">
-                <h4>Achtung bei der Hitze</h4>
-                <p>Da Olivenöl empfindlich ist, empfehlen wir hier dringend die Sous-Vide Methode oder ein sehr sanftes Wasserbad bei max. 80°C.</p>
+                <a href="grundrezepte.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="card-icon"><i data-lucide="salad" size="32"></i></div>
+                    <h3>Canna-Olivenöl</h3>
+                    <p>Für Salate und Herzhaftes.</p>
+                    <span style="color: var(--primary); font-weight: bold; margin-top: auto;">Zum Rezept &rarr;</span>
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- WERBEPLATZ 2: BANNER FULL (Vor dem Rechner) -->
+    <!-- Bricht den Fluss zwischen Lesen und Interaktion -->
+    <div class="ad-slot ad-banner-full ad-label">
+        <span>Anzeige / Banner</span>
+    </div>
 
     <!-- CALCULATOR -->
     <section id="calculator">
         <h2>Dosierungs-Rechner</h2>
         <p class="text-center">Berechne, wie stark deine Butter oder dein Öl wird.</p>
         
-        <div class="calculator-wrapper">
+        <div class="calculator-wrapper" style="background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
             <!-- Input 1: Cannabis Menge -->
-            <div class="calc-group">
-                <label>Cannabis (Gramm):</label>
-                <div class="slider-container">
-                    <input type="range" id="weedAmount" min="1" max="50" value="5" oninput="calculate()">
-                    <input type="number" id="weedAmountNum" value="5" oninput="syncSlider('weedAmount', this.value); calculate()">
+            <div class="calc-group" style="margin-bottom: 1.5rem;">
+                <label style="display:block; margin-bottom:0.5rem; font-weight:bold;">Cannabis (Gramm):</label>
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <input type="range" id="weedAmount" min="1" max="50" value="5" oninput="calculate()" style="flex-grow:1; accent-color: var(--primary);">
+                    <input type="number" id="weedAmountNum" value="5" oninput="syncSlider('weedAmount', this.value); calculate()" style="width:80px; padding:0.5rem; border:1px solid #ddd; border-radius:8px; text-align:center;">
                 </div>
             </div>
 
             <!-- Input 2: THC Gehalt -->
-            <div class="calc-group">
-                <label>THC Gehalt der Blüten (%):</label>
-                <div class="slider-container">
-                    <input type="range" id="thcPercent" min="1" max="35" value="15" oninput="calculate()">
-                    <input type="number" id="thcPercentNum" value="15" oninput="syncSlider('thcPercent', this.value); calculate()">
+            <div class="calc-group" style="margin-bottom: 1.5rem;">
+                <label style="display:block; margin-bottom:0.5rem; font-weight:bold;">THC Gehalt der Blüten (%):</label>
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <input type="range" id="thcPercent" min="1" max="35" value="15" oninput="calculate()" style="flex-grow:1; accent-color: var(--primary);">
+                    <input type="number" id="thcPercentNum" value="15" oninput="syncSlider('thcPercent', this.value); calculate()" style="width:80px; padding:0.5rem; border:1px solid #ddd; border-radius:8px; text-align:center;">
                 </div>
             </div>
 
             <!-- Input 3: Fett Menge -->
-            <div class="calc-group">
-                <label>Menge Butter/Öl (ml oder g):</label>
-                <div class="slider-container">
-                    <input type="range" id="fatAmount" min="50" max="1000" step="10" value="250" oninput="calculate()">
-                    <input type="number" id="fatAmountNum" value="250" oninput="syncSlider('fatAmount', this.value); calculate()">
+            <div class="calc-group" style="margin-bottom: 1.5rem;">
+                <label style="display:block; margin-bottom:0.5rem; font-weight:bold;">Menge Butter/Öl (ml oder g):</label>
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <input type="range" id="fatAmount" min="50" max="1000" step="10" value="250" oninput="calculate()" style="flex-grow:1; accent-color: var(--primary);">
+                    <input type="number" id="fatAmountNum" value="250" oninput="syncSlider('fatAmount', this.value); calculate()" style="width:80px; padding:0.5rem; border:1px solid #ddd; border-radius:8px; text-align:center;">
                 </div>
             </div>
 
-            <div class="result-box">
+            <div class="result-box" style="background: #f0f9eb; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; text-align: center; border: 1px solid var(--primary);">
                 <p>Geschätzte Potenz:</p>
-                <div class="result-value" id="resultMg">0 mg THC</div>
+                <div class="result-value" id="resultMg" style="font-size: 2rem; font-weight: 800; color: var(--secondary);">0 mg THC</div>
                 <p>pro Teelöffel (ca. 5ml): <span id="resultTsp" style="font-weight:bold">0</span> mg</p>
             </div>
             <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; color: #888;">
@@ -352,16 +163,11 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-        <h2>Kontakt</h2>
-        <p class="text-center">Fragen? Anregungen? Schreib uns!</p>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Danke für deine Nachricht! (Demo)');">
-            <input type="text" class="form-control" placeholder="Dein Name" required>
-            <input type="email" class="form-control" placeholder="Deine Email" required>
-            <textarea class="form-control" rows="5" placeholder="Deine Nachricht" required></textarea>
-            <button type="submit" class="btn" style="width: 100%">Senden</button>
-        </form>
+    <!-- CONTACT TEASER -->
+    <section id="contact-teaser" style="text-align: center;">
+        <h2>Noch Fragen?</h2>
+        <p>Du bist dir unsicher oder hast Anregungen?</p>
+        <a href="contact.html" class="btn">Zum Kontaktformular</a>
     </section>
 
     <!-- FOOTER -->
@@ -394,23 +200,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // --- TABS LOGIC ---
-        function openTab(tabName) {
-            // Hide all contents
-            document.querySelectorAll('.recipe-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            // Deactivate all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected
-            document.getElementById(tabName).classList.add('active');
-            // Activate button (simple check via event would be cleaner but this works for inline)
-            event.target.classList.add('active');
-        }
-
         // --- CALCULATOR LOGIC ---
         function syncSlider(sliderId, val) {
             document.getElementById(sliderId).value = val;
@@ -428,7 +217,6 @@
             document.getElementById('fatAmountNum').value = fat;
 
             // Formula: (Grams * 1000) * (THC% / 100) * Efficiency (approx 0.6)
-            // Efficiency loss happens during decarbing and infusion.
             const efficiency = 0.6; 
             
             let totalThcMg = (weed * 1000) * (thc / 100) * efficiency;
