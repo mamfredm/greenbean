@@ -1,25 +1,24 @@
 // Menü Interaktivität
+document.addEventListener('DOMContentLoaded', () => {
+  const menuIcon = document.querySelector('.menu-icon');
+  const menu = document.querySelector('.menu');
 
-const menuIcon = document.querySelector('.menu-icon');
-const menu = document.querySelector('.menu');
+  if (menuIcon && menu) {
+    menuIcon.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
 
-menuIcon.addEventListener('click', () => {
-  menu.classList.toggle('show');
+    // FIX: Menüpunkte korrekt auswählen (Links statt Buttons)
+    const menuItems = document.querySelectorAll('.menu a');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menu.classList.remove('show');
+      });
+    });
+  }
 });
 
-// Menüpunkte auswählen
-const menuItems = document.querySelectorAll('.menu li .berechnen-button');
-
-// Event Listener zu jedem Menüpunkt hinzufügen
-menuItems.forEach(item => {
-  item.addEventListener('click', (event) => {
-    if (event.target.hash) { // Überprüfen, ob der Link einen Anker hat
-      menu.classList.remove('show'); // Menü schließen
-    }
-  });
-});
-
-// Cannabutter-Rechner 
+// Cannabutter-Rechner Konfiguration
 const THC_LEVELS = {
   LOW: 13,
   MEDIUM: 25,
@@ -36,15 +35,45 @@ const VALIDATION_RULES = {
   cannabis1: { min: 1, max: 500, message: "Cannabis muss zwischen 1 und 500 Gramm liegen" },
   thc1: { min: 1, max: 40, message: "THC-Gehalt muss zwischen 1% und 40% liegen" },
   buttermenge1: { min: 100, max: 1000, message: "Buttermenge muss zwischen 100 und 1000 Gramm liegen" },
-  effizienz1: { min: 50, max: 90, message: "Effizienz muss zwischen 50% und 0% liegen" },
+  effizienz1: { min: 50, max: 90, message: "Effizienz muss zwischen 50% und 90% liegen" }, // FIX: Tippfehler 0% -> 90%
   butterPotenz2: { min: 0, max: Infinity, message: "Butterpotenz muss positiv sein" },
   butterRezept2: { min: 1, max: 1000, message: "Buttermenge im Rezept muss zwischen 1 und 1000 Gramm liegen" },
   anzahlPortionen2: { min: 1, max: 100, message: "Anzahl Portionen muss zwischen 1 und 100 liegen" }
 };
 
+// Hilfsfunktionen
+function getOrCreateErrorDiv(input) {
+  let errorDiv = input.nextElementSibling;
+  // Überspringe Slider-Container, falls vorhanden, und suche danach
+  if (errorDiv && errorDiv.classList.contains('slider-value')) {
+    errorDiv = errorDiv.nextElementSibling;
+  }
+  
+  if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+    errorDiv = document.createElement('div');
+    errorDiv.classList.add('error-message');
+    errorDiv.style.color = '#ff0000';
+    errorDiv.style.fontSize = '0.8em';
+    errorDiv.style.marginTop = '2px';
+    
+    // Einfügen an der richtigen Stelle
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('slider-value')) {
+      input.parentNode.insertBefore(errorDiv, input.nextElementSibling.nextSibling);
+    } else {
+      input.parentNode.insertBefore(errorDiv, input.nextSibling);
+    }
+  }
+  return errorDiv;
+}
+
 function validateInput(input) {
+  if (!input) return false;
+  
   const value = parseFloat(input.value);
   const rules = VALIDATION_RULES[input.id];
+  
+  if (!rules) return true; // Keine Regeln für dieses Input
+
   const errorDiv = getOrCreateErrorDiv(input);
   
   if (isNaN(value) || value < rules.min || value > rules.max) {
@@ -59,27 +88,21 @@ function validateInput(input) {
   }
 }
 
-function getOrCreateErrorDiv(input) {
-  let errorDiv = input.nextElementSibling;
-  if (!errorDiv || !errorDiv.classList.contains('error-message')) {
-    errorDiv = document.createElement('div');
-    errorDiv.classList.add('error-message');
-    errorDiv.style.color = '#ff0000';
-    errorDiv.style.fontSize = '0.8em';
-    errorDiv.style.marginTop = '2px';
-    input.parentNode.insertBefore(errorDiv, input.nextSibling);
-  }
-  return errorDiv;
-}
-
 function validateInputs1() {
   const inputs = ['cannabis1', 'thc1', 'buttermenge1', 'effizienz1'];
-  return inputs.every(id => validateInput(document.getElementById(id)));
+  // Nur validieren, wenn alle Elemente existieren
+  const elements = inputs.map(id => document.getElementById(id));
+  if (elements.some(el => !el)) return false;
+  
+  return elements.every(el => validateInput(el));
 }
 
 function validateInputs2() {
   const inputs = ['butterPotenz2', 'butterRezept2', 'anzahlPortionen2'];
-  return inputs.every(id => validateInput(document.getElementById(id)));
+  const elements = inputs.map(id => document.getElementById(id));
+  if (elements.some(el => !el)) return false;
+
+  return elements.every(el => validateInput(el));
 }
 
 function formatNumber(number, decimals = 2) {
@@ -91,6 +114,8 @@ function formatNumber(number, decimals = 2) {
 
 function setTHCColor(thcPortion) {
   const thcPortionSpan = document.getElementById("thcPortion2");
+  if (!thcPortionSpan) return;
+
   if (thcPortion <= THC_LEVELS.LOW) {
     thcPortionSpan.style.color = THC_LEVELS.COLORS.LOW;
   } else if (thcPortion <= THC_LEVELS.MEDIUM) {
@@ -102,6 +127,7 @@ function setTHCColor(thcPortion) {
   }
 }
 
+// Berechnungsfunktionen
 function berechnen1() {
   if (!validateInputs1()) return;
 
@@ -116,7 +142,13 @@ function berechnen1() {
   document.getElementById("butterPotenz1").innerHTML = formatNumber(butterPotenz, 2);
   document.getElementById("thcGesamt1").innerHTML = formatNumber(thcGesamt);
   document.getElementById("ergebnis-box1").style.display = "block";
-  document.getElementById("butterPotenz2").value = butterPotenz.toFixed(2);
+  
+  const butterPotenz2 = document.getElementById("butterPotenz2");
+  if (butterPotenz2) {
+      butterPotenz2.value = butterPotenz.toFixed(2);
+      // Trigger input event für Validierung/Slider falls nötig
+      butterPotenz2.dispatchEvent(new Event('input'));
+  }
 }
 
 function berechnen2() {
@@ -136,6 +168,7 @@ function berechnen2() {
   document.getElementById("ergebnis-box2").style.display = "block";
 }
 
+// Slider Setup mit Sicherheitscheck
 function setupSliderInputSync() {
   const pairs = [
     { number: 'cannabis1', slider: 'cannabisSlider1' },
@@ -149,84 +182,98 @@ function setupSliderInputSync() {
   pairs.forEach(pair => {
     const numberInput = document.getElementById(pair.number);
     const sliderInput = document.getElementById(pair.slider);
-    const sliderValueDiv = sliderInput.nextElementSibling;
 
-    sliderValueDiv.querySelector('.min-value').textContent = sliderInput.min;
-    sliderValueDiv.querySelector('.max-value').textContent = sliderInput.max;
+    // FIX: Nur ausführen, wenn beide Elemente auf der aktuellen Seite existieren
+    if (numberInput && sliderInput) {
+      const sliderValueDiv = sliderInput.nextElementSibling;
+      if (sliderValueDiv) {
+        const minSpan = sliderValueDiv.querySelector('.min-value');
+        const maxSpan = sliderValueDiv.querySelector('.max-value');
+        if (minSpan) minSpan.textContent = sliderInput.min;
+        if (maxSpan) maxSpan.textContent = sliderInput.max;
+      }
 
-    sliderInput.addEventListener('input', () => {
-      numberInput.value = sliderInput.value;
-      validateInput(numberInput);
-      document.getElementById('ergebnis-box1').style.display = 'none';
-      document.getElementById('ergebnis-box2').style.display = 'none';
-    });
+      sliderInput.addEventListener('input', () => {
+        numberInput.value = sliderInput.value;
+        validateInput(numberInput);
+        const box1 = document.getElementById('ergebnis-box1');
+        const box2 = document.getElementById('ergebnis-box2');
+        if (box1) box1.style.display = 'none';
+        if (box2) box2.style.display = 'none';
+      });
 
-    numberInput.addEventListener('input', () => {
-      sliderInput.value = numberInput.value;
-      validateInput(numberInput);
-      document.getElementById('ergebnis-box1').style.display = 'none';
-      document.getElementById('ergebnis-box2').style.display = 'none';
-    });
+      numberInput.addEventListener('input', () => {
+        sliderInput.value = numberInput.value;
+        validateInput(numberInput);
+        const box1 = document.getElementById('ergebnis-box1');
+        const box2 = document.getElementById('ergebnis-box2');
+        if (box1) box1.style.display = 'none';
+        if (box2) box2.style.display = 'none';
+      });
 
-    // Initial validation
-    numberInput.addEventListener('blur', () => validateInput(numberInput));
+      // Initial validation
+      numberInput.addEventListener('blur', () => validateInput(numberInput));
+    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', setupSliderInputSync);
 
-
-// Filter
+// Filter Logik mit Sicherheitscheck
 document.addEventListener('DOMContentLoaded', function () {
   const oelFilter = document.getElementById('oel-filter');
   const zubereitungFilter = document.getElementById('zubereitung-filter');
 
-  // Alle Rezept-Sektionen verstecken
-  const rezeptSektionen = document.querySelectorAll('.content-section');
-  rezeptSektionen.forEach(sektion => {
-    sektion.style.display = 'none';
-  });
-
-  oelFilter.addEventListener('change', function () {
-    const selectedOel = this.value;
-
-    // Alle Rezept-Sektionen verstecken
+  // Nur ausführen, wenn wir auf der Rezeptseite sind
+  if (oelFilter && zubereitungFilter) {
+    const rezeptSektionen = document.querySelectorAll('.content-section');
+    
+    // Initial verstecken
     rezeptSektionen.forEach(sektion => {
       sektion.style.display = 'none';
     });
 
-    // Zubereitungsfilter zurücksetzen
-    zubereitungFilter.selectedIndex = 0;
+    oelFilter.addEventListener('change', function () {
+      const selectedOel = this.value;
 
-    // Nur die ausgewählte Öl-Sektion anzeigen
-    if (selectedOel !== 'start') {
-      document.getElementById(`${selectedOel}-sektion`).style.display = 'block';
-    }
-  });
+      rezeptSektionen.forEach(sektion => {
+        sektion.style.display = 'none';
+      });
 
-  zubereitungFilter.addEventListener('change', function () {
-    const selectedOel = oelFilter.value;
-    const selectedZubereitung = this.value;
+      zubereitungFilter.selectedIndex = 0;
 
-    // Alle Zubereitungs-Sektionen innerhalb der Öl-Sektion verstecken
-    const zubereitungSektionen = document.querySelectorAll(`#${selectedOel}-sektion .content-section`);
-    zubereitungSektionen.forEach(sektion => {
-      sektion.style.display = 'none';
+      if (selectedOel !== 'start') {
+        const target = document.getElementById(`${selectedOel}-sektion`);
+        if (target) target.style.display = 'block';
+      }
     });
 
-    // Nur die ausgewählte Zubereitungs-Sektion anzeigen
-    if (selectedZubereitung !== 'start') {
-      document.getElementById(`${selectedOel}-${selectedZubereitung}-sektion`).style.display = 'block';
+    zubereitungFilter.addEventListener('change', function () {
+      const selectedOel = oelFilter.value;
+      const selectedZubereitung = this.value;
 
-      // Zur Zutaten-Sektion springen (mit sanftem Scroll-Effekt)
-      const zutatenSektion = document.getElementById(`${selectedOel}-sektion`);
-      zutatenSektion.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+      // Sub-Sektionen verstecken
+      if (selectedOel !== 'start') {
+        const activeOelSection = document.getElementById(`${selectedOel}-sektion`);
+        if (activeOelSection) {
+            const subSections = activeOelSection.querySelectorAll('.content-section');
+            subSections.forEach(s => s.style.display = 'none');
+        }
+      }
+
+      if (selectedZubereitung !== 'start' && selectedOel !== 'start') {
+        const target = document.getElementById(`${selectedOel}-${selectedZubereitung}-sektion`);
+        if (target) {
+            target.style.display = 'block';
+            const zutatenSektion = document.getElementById(`${selectedOel}-sektion`);
+            if (zutatenSektion) zutatenSektion.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
 });
 
-
-// Verbesserter Code für die Kontaktformular-Verarbeitung mit JSON
+// Kontaktformular
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contactForm');
   
@@ -238,14 +285,12 @@ document.addEventListener('DOMContentLoaded', function() {
 async function handleSubmit(event) {
   event.preventDefault();
   
-  // Loading-Status anzeigen
   const submitButton = event.target.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.textContent;
   submitButton.textContent = 'Wird gesendet...';
   submitButton.disabled = true;
 
   try {
-      // Formulardaten direkt als JSON-Objekt sammeln
       const formData = new FormData(event.target);
       const data = {
           name: formData.get('name'),
@@ -257,14 +302,12 @@ async function handleSubmit(event) {
 
       const scriptURL = 'https://script.google.com/macros/s/AKfycby1fRZTrGdv-uNuVKNwRvzU9B7rEc3x3cKseXaueOQQHUf_TcBnwm-pjcXjWxV7q9s/exec';
 
-      // Daten als JSON senden
-      const response = await fetch(scriptURL, {
+      await fetch(scriptURL, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
               'Content-Type': 'text/plain;charset=utf-8',
           },
-          // Daten als JSON-String senden
           body: JSON.stringify(data)
       });
 
@@ -291,7 +334,9 @@ function showMessage(message, type) {
   messageElement.textContent = message;
 
   const form = document.getElementById('contactForm');
-  form.parentNode.insertBefore(messageElement, form);
+  if (form) {
+    form.parentNode.insertBefore(messageElement, form);
+  }
 
   setTimeout(() => {
       messageElement.remove();
