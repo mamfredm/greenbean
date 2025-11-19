@@ -3,242 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Green Bean - Ihr Guide für Cannabis-Küche. Lernen Sie alles über die Zubereitung von Cannabutter und Cannabis-Ölen.">
-    <meta name="keywords" content="cannabis cooking, cannabutter, cannabis oil, edibles, cannabis-food, weed butter, kochen mit weed">
+    <meta name="description" content="Green Bean - Dein Guide für Cannabis-Küche. Rezepte, Infos und Dosierungsrechner.">
+    <title>Green Bean - Cooking with Benefits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" as="style">
-    <link rel="preload" href="style.css" as="style">
-    
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
- 
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="479dc606-205e-4a16-9f2f-d1c504243d5b" data-blockingmode="auto" type="text/javascript"></script>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WSGJCFRR');</script>
-   
-   
+    <!-- Icons via Lucide (als Ersatz für lokale Bilder im Preview) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  <title>Green Bean - Ihr Guide für der Weed-Küche. Lernen Sie alles über die Zubereitung von Cannabutter und Cannabis-Ölen</title>
-  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+    <style>
+        /* --- CSS VARIABLEN & RESET --- */
+        :root {
+            --primary: #6aa84f;
+            --primary-dark: #4CAF50;
+            --secondary: #38761d;
+            --text: #333;
+            --text-light: #666;
+            --bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; height: auto; }
+        
+        /* --- TYPOGRAFIE --- */
+        h1, h2, h3 { line-height: 1.2; margin-bottom: 1rem; }
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 2rem; color: var(--secondary); text-align: center; margin-bottom: 2rem; }
+        h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        p { margin-bottom: 1rem; color: var(--text-light); }
+        
+        .highlight { color: var(--primary); }
+        .text-center { text-align: center; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+        .btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: var(--white); }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 6rem 1.5rem;
+            background: linear-gradient(135deg, #f0f9eb 0%, #ffffff 100%);
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem; display: block; }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        
+        /* --- INFOS GRID --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-icon { color: var(--primary); margin-bottom: 1rem; }
+
+        /* --- RECIPE TABS --- */
+        .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn {
+            background: var(--white);
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .tab-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        
+        .recipe-content { display: none; animation: fadeIn 0.5s; }
+        .recipe-content.active { display: block; }
+        
+        .method-card {
+            background: var(--white);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- CALCULATOR --- */
+        .calculator-wrapper {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calc-group { margin-bottom: 1.5rem; }
+        .calc-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; }
+        .slider-container { display: flex; align-items: center; gap: 1rem; }
+        input[type="range"] { flex-grow: 1; accent-color: var(--primary); }
+        input[type="number"] { 
+            width: 80px; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-weight: bold;
+        }
+        
+        .result-box {
+            background: #f0f9eb;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid var(--primary);
+        }
+        .result-value { font-size: 2rem; font-weight: 800; color: var(--secondary); }
+
+        /* --- CONTACT FORM --- */
+        .contact-form { max-width: 600px; margin: 0 auto; }
+        .form-control { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(106, 168, 79, 0.2); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--text); color: var(--white); padding: 3rem 1.5rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-links a { color: #aaa; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-links a:hover { color: var(--white); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSGJCFRR"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    
+
+    <!-- HEADER -->
     <header>
-      <nav role="navigation" aria-label="Main navigation">
-          <a href="#start" class="logo" aria-label="Green Bean Home">Green Bean</a>
-          <button class="menu-icon" aria-label="Toggle menu" aria-expanded="false">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-          </button>
-          <ul class="menu" role="menu">
-              <li role="none"><a href="index.html" role="menuitem">Kochen mit Cannabis</a></li>
-              <li role="none"><a href="infos.html" role="menuitem">Infos</a></li>
-              <li role="none"><a href="infos.html#Zubereitung" role="menuitem">Zubereitungsmethoden</a></li>
-              <li role="none"><a href="grundrezepte.html" role="menuitem">Grundrezepte</a></li>
-              <li role="none"><a href="#rechner1" role="menuitem">Canna Rechner</a></li>
-          </ul>
-      </nav>
-  </header>
-  
-  <section id="start">
-    <h1>Willkommen bei <span class="green-bean">Green Bean</span></h1>
-    <p>Cooking with Benefits</p>
-  </section>
+        <nav>
+            <a href="#" class="logo">
+                <i data-lucide="sprout"></i> Green Bean
+            </a>
+            <button class="menu-toggle" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#infos">Wissen</a></li>
+                <li><a href="#rezepte">Rezepte</a></li>
+                <li><a href="#calculator">Rechner</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section id="cooking">
-    <h2>Kochen mit Cannabis</h2>
-    <p>Wusstest du, dass du fast mit jedem deiner Lieblingsrezepten deinen Spaß haben kannst?</p>
-    <p>Lerne, wie du Cannabisbutter und Cannabis-Öl selbst herstellst. Entdecke unsere Grundrezepte, nutze unseren Cannabutter-Rechner und starte deine kulinarische Cannabis-Reise!</p>  
-  </section>
+    <!-- HERO -->
+    <section class="hero" id="start">
+        <div class="hero-content">
+            <span class="hero-subtitle">Cooking with Benefits</span>
+            <h1>Entdecke die Kunst des <span class="highlight">Cannabis-Kochens</span></h1>
+            <p>Lerne, wie du Cannabisbutter und Cannabis-Öl sicher, lecker und präzise dosiert selbst herstellst.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#rezepte" class="btn">Zu den Rezepten</a>
+                <a href="#calculator" class="btn btn-outline" style="margin-left: 10px;">Zum Rechner</a>
+            </div>
+        </div>
+    </section>
 
-  <section id="infos">
-    <h2>Du möchtest Cannabis in deine Küche integrieren, weißt aber nicht, wo du anfangen sollst?</h2>
-    <p>Im Bereich "Infos" findest du umfassende Leitfäden zu den Grundlagen des Kochens mit Cannabis.</p>
-    <h3>Lerne mehr über: </h3>
-    <div class="Butterundoil">
-      <div>
-        <h4>Decarboxylierung</h4>
-        <h5>Wichtig & Richtig</h5>
-        <img src="image-icon/rocket.png" alt="Rocket Icon" class="bild-zubereitung">
-        <p>Verstehe diesen wichtigen Prozess, der die Cannabinoide aktiviert und die Wirkung deiner Cannabis-Kreationen verstärkt.</p>
-        <a href="infos.html" class="info-button">Let's go!</a>
-      </div> 
-      <div>
-         <h4>Infundierte Ölen und Butter</h4>
-         <h5>Das gewisse Extra</h5>
-         <img src="image-icon/cannabis-food.png" alt="Cannbis Food Icon" class="bild-zubereitung">
-         <p>Entdecke die verschiedenen Arten von Ölen und Butter, die sich zur Infusion mit Cannabis eignen, und lerne die besten Methoden zur Herstellung kennen.</p>
-         <a href="grundrezepte.html" class="info-button">Let's go!</a>
-      </div>
-      <div>
-        <h4>Zubereitungsweisen</h4>
-        <h5>Gewusst wie</h5>
-        <img src="image-icon/cooking.png" alt="cooking Icon" class="bild-zubereitung">
-        <p>Erfahre, wie du infundierten Öle und Butter in verschiedenen Rezepten herstellst und welche Temperaturen und Garzeiten optimal sind.</p>
-        <a href="infos.html#Zubereitung" class="info-button">Let's go!</a>
-      </div>
-    </div>
-    <div class="call">
-    <p>Mit diesem Wissen legst du den Grundstein für deine kulinarische Cannabis-Reise!</p>
-    </div>
-  </section>
+    <!-- INFOS / WISSEN -->
+    <section id="infos">
+        <h2>Basiswissen</h2>
+        <div class="info-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-icon"><i data-lucide="flame" size="32"></i></div>
+                <h3>Decarboxylierung</h3>
+                <p>Das A und O. Ohne Hitze keine Wirkung. Lerne, warum du dein Gras erst "backen" musst, bevor du es kochst.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-icon"><i data-lucide="droplets" size="32"></i></div>
+                <h3>Butter vs. Öl</h3>
+                <p>Butter schmeckt cremiger, Kokosöl ist potenter und vegan. Wähle den richtigen Fettträger für dein Gericht.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-icon"><i data-lucide="chef-hat" size="32"></i></div>
+                <h3>Zubereitung</h3>
+                <p>Ob Sous-Vide, Slow Cooker oder Kochtopf - wir zeigen dir die Vor- und Nachteile jeder Methode.</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="Zubereitung">
-    <h2>Du möchtest wissen, wie du Cannabis-Butter und -Öl herstellen kannst und welche Methoden es dafür gibt? Perfekt!</h2>
-    <p>In diesem Abschnitt dreht sich alles um die verschiedenen Zubereitungsarten deiner Canna-Basis.</p>
-    <p>Wir erklären dir Schritt für Schritt, wie du Cannabis-Butter und -Öl mit folgenden Methoden herstellst:</p>
-    <div class="zubereitungsmethoden">
-     <div>
-      <h4>Kochen auf dem Herd</h4>
-      <h5>Die klassische Methode</h5>
-      <img src="image-icon/herd.png" alt="Herd Icon" class="bild-zubereitung">
-      <p>Die bewährte Technik, bei der du Cannabis und Fett unter Rühren auf dem Herd erhitzt. Wir zeigen dir, worauf du achten musst, um optimale Ergebnisse zu erzielen. </p>  
-     </div>
-     <div>
-      <h4>Slow Cooker</h4>
-      <h5>Die komfortable Lösung</h5>
-      <img src="image-icon/slow-cooker.png" alt="Slow Cooker Icon" class="bild-zubereitung">
-      <p>Entspanntes Kochen mit dem Slow Cooker! Entdecke, wie du mit dieser Methode schonend und gleichmäßig infundierte Butter und Öle herstellst.</p>
-     </div>
-     <div>
-      <h4>Sous-Vide</h4>
-      <h5>Die absolute Empfehlung</h5>
-      <img src="image-icon/sous-vide.png" alt="Sous-Vide Icon" class="bild-zubereitung">
-      <p>Präzision und Kontrolle mit Sous-Vide! Erfahre, wie du mit dieser modernen Technik die Temperatur exakt steuerst und hochwertige Cannabis-Infusionen erzeugst.</p>  
-     </div>
-    </div>
-    <div class="call">
-      <a href="infos.html#Zubereitung" class="info-button">Let's go!</a>
-    </div>
-  </section>
+    <!-- REZEPTE (Mit Tabs) -->
+    <section id="rezepte">
+        <h2>Grundrezepte</h2>
+        <p class="text-center" style="margin-bottom: 2rem;">Wähle deine Basis:</p>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('butter')">Butter</button>
+            <button class="tab-btn" onclick="openTab('kokos')">Kokosöl</button>
+            <button class="tab-btn" onclick="openTab('oliven')">Olivenöl</button>
+        </div>
 
-  <section id="rechner1">
-    <h2>Canna Butter Rechner</h2>
-    <p>Mit diesem Rechner kannst du schnell und einfach den THC- oder CBD-Gehalt deiner Cannabisbutter ermitteln.</p> 
-    <p>Gib einfach den Gehalt der Blüten in Prozent und die Menge in Gramm ein, sowie die Menge an Butter die du Herstellen möchtest und wir berechnen den Gesamtgehalt. </p>
-    <p>Wir haben Standartmäßig eine Decarboxylierungseffizienz von 60% eingestellt, diese kannst du aber auch nach deinen Bedürfnissen anpassen.</p>
-    <div class="container">
-      <label for="cannabis1">Cannabis (in g):</label>
-      <div class="slider-description">Gewicht der Cannabisblüten in Gramm.</div>
-      <input type="number" id="cannabis1" name="cannabis1" min="1" max="500" value="10">
-      <input type="range" id="cannabisSlider1" name="cannabisSlider1" min="1" max="500" value="10">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+        <!-- BUTTER CONTENT -->
+        <div id="butter" class="recipe-content active">
+            <h3>Cannabutter - Der Klassiker</h3>
+            <p>Perfekt für Brownies, Cookies und zum Verfeinern.</p>
+            
+            <div class="method-card">
+                <h4><i data-lucide="thermometer"></i> Methode 1: Kochtopf (Klassisch)</h4>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Gras zerkleinern und decarboxylieren (30-40 Min bei 110°C im Ofen).</li>
+                    <li>Wasser und Butter im Topf schmelzen.</li>
+                    <li>Gras hinzufügen und 3-4 Stunden bei niedriger Temperatur (nicht kochen!) ziehen lassen.</li>
+                    <li>Durch ein Tuch abseihen und im Kühlschrank fest werden lassen.</li>
+                    <li>Wasser abgießen. Fertig!</li>
+                </ol>
+            </div>
+            <div class="method-card">
+                <h4><i data-lucide="watch"></i> Methode 2: Sous-Vide (Profi)</h4>
+                <p>Vakuumiere Butter und Gras. Gare es im Wasserbad bei 85°C für 4 Stunden. Geruchsneutral und extrem potent.</p>
+            </div>
+        </div>
 
-      <label for="thc1">THC | CBD (in %):</label>
-      <div class="slider-description">THC- bzw. CBD-Gehalt der Cannabisblüten in Prozent.</div>
-      <input type="number" id="thc1" name="thc1" min="1" max="40" value="15">
-      <input type="range" id="thcSlider1" name="thcSlider1" min="1" max="40" value="15">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+        <!-- KOKOS CONTENT -->
+        <div id="kokos" class="recipe-content">
+            <h3>Canna-Kokosöl - Vegan & Potent</h3>
+            <p>Durch den hohen Fettgehalt absorbiert Kokosöl Cannabinoide besonders gut.</p>
+            <div class="method-card">
+                <h4>Zubereitung</h4>
+                <p>Ähnlich wie bei Butter, aber oft ohne Wasserzusatz im Wasserbad (Bain-Marie) herzustellen, um Anbrennen zu vermeiden.</p>
+                <p><strong>Tipp:</strong> Füge einen Löffel Sojalecithin hinzu, um die Aufnahme im Körper zu verbessern.</p>
+            </div>
+        </div>
 
-      <label for="buttermenge1">Buttermenge (in ml/mg):</label>
-      <div class="slider-description">Menge die du herstellen möchtest Butter in Millilitern oder Gramm.</div>
-      <input type="number" id="buttermenge1" name="buttermenge1" min="100" max="1000" value="250">
-      <input type="range" id="buttermengeSlider1" name="buttermengeSlider1" min="100" max="1000" value="20">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+        <!-- OLIVEN CONTENT -->
+        <div id="oliven" class="recipe-content">
+            <h3>Canna-Olivenöl - Das Mediterrane</h3>
+            <p>Ideal für Salate, Pasta und Dips. Nicht zu hoch erhitzen!</p>
+            <div class="method-card">
+                <h4>Achtung bei der Hitze</h4>
+                <p>Da Olivenöl empfindlich ist, empfehlen wir hier dringend die Sous-Vide Methode oder ein sehr sanftes Wasserbad bei max. 80°C.</p>
+            </div>
+        </div>
+    </section>
 
-      <label for="effizienz1">Effizienz (in %):</label>
-      <div class="slider-description">Effizienz der THC- bzw. CBD-Extraktion (typischerweise 50-70%).</div>
-      <input type="number" id="effizienz1" name="effizienz1" min="50" max="90" value="60">
-      <input type="range" id="effizienzSlider1" name="effizienzSlider1" min="50" max="90" value="60">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+    <!-- CALCULATOR -->
+    <section id="calculator">
+        <h2>Dosierungs-Rechner</h2>
+        <p class="text-center">Berechne, wie stark deine Butter oder dein Öl wird.</p>
+        
+        <div class="calculator-wrapper">
+            <!-- Input 1: Cannabis Menge -->
+            <div class="calc-group">
+                <label>Cannabis (Gramm):</label>
+                <div class="slider-container">
+                    <input type="range" id="weedAmount" min="1" max="50" value="5" oninput="calculate()">
+                    <input type="number" id="weedAmountNum" value="5" oninput="syncSlider('weedAmount', this.value); calculate()">
+                </div>
+            </div>
 
-      <button onclick="berechnen1()" class="berechnen-button">Berechnen</button>
+            <!-- Input 2: THC Gehalt -->
+            <div class="calc-group">
+                <label>THC Gehalt der Blüten (%):</label>
+                <div class="slider-container">
+                    <input type="range" id="thcPercent" min="1" max="35" value="15" oninput="calculate()">
+                    <input type="number" id="thcPercentNum" value="15" oninput="syncSlider('thcPercent', this.value); calculate()">
+                </div>
+            </div>
 
-      <div id="ergebnis-box1" style="display: none;"> 
-        <h3 style="color: #6aa84f;">Butterpotenz</h3>
-        <p>Butter Potenz (mg THC/ml Butter): <span id="butterPotenz1"></span></p>
-        <p>THC-Menge in der Butter (mg): <span id="thcGesamt1"></span></p>
-      </div>
-    </div>
-    <p>Mit dem Ergebnis kannst du nun jegliche Rezepte deiner Wahl kochen und aufpeppen.</p>
-    <p>Solltest du bereits ein Rezpt haben, wie zum Beispiel für Brownies, kannst du dir im nächsten Step die gewünschte Dosierung ausrechnen.</p>
-  </section>
+            <!-- Input 3: Fett Menge -->
+            <div class="calc-group">
+                <label>Menge Butter/Öl (ml oder g):</label>
+                <div class="slider-container">
+                    <input type="range" id="fatAmount" min="50" max="1000" step="10" value="250" oninput="calculate()">
+                    <input type="number" id="fatAmountNum" value="250" oninput="syncSlider('fatAmount', this.value); calculate()">
+                </div>
+            </div>
 
-  <section id="rechner2">
-    <h2>Dosierung für dein Rezept und pro Portion</h2>
-    <p>Um einfach die Stärke deines Rezepts zu berechnen und einen Überblick des Gehalts pro Portion zu ermitteln, gibst du einfach die verwendete Menge an Butter aus dem Rezept an.</p>
-    <p>Die Butterpotenz wird automatisch aus dem ersten Rechner übernommen.</p>
-    <div class="container">
-      <label for="butterPotenz2">Butterpotenz (mg THC/ml Butter):</label>
-      <div class="slider-description">Die Butterpotenz aus dem ersten Rechner.</div>
-      <input type="number" id="butterPotenz2" name="butterPotenz2" min="0"  value="0" readonly>
+            <div class="result-box">
+                <p>Geschätzte Potenz:</p>
+                <div class="result-value" id="resultMg">0 mg THC</div>
+                <p>pro Teelöffel (ca. 5ml): <span id="resultTsp" style="font-weight:bold">0</span> mg</p>
+            </div>
+            <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; color: #888;">
+                *Berechnung basiert auf einer durchschnittlichen Extraktions-Effizienz von ca. 60-70% bei Decarboxylierung.
+            </p>
+        </div>
+    </section>
 
-      <label for="butterRezept2">Buttermenge im Rezept (in g):</label>
-      <div class="slider-description">Menge der Cannabisbutter, die im Rezept verwendet wird.</div>
-      <input type="number" id="butterRezept2" name="butterRezept2" min="1" max="1000" value="140">
-      <input type="range" id="butterRezeptSlider2" name="butterRezeptSlider2" min="1" max="1000" value="140">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p class="text-center">Fragen? Anregungen? Schreib uns!</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Danke für deine Nachricht! (Demo)');">
+            <input type="text" class="form-control" placeholder="Dein Name" required>
+            <input type="email" class="form-control" placeholder="Deine Email" required>
+            <textarea class="form-control" rows="5" placeholder="Deine Nachricht" required></textarea>
+            <button type="submit" class="btn" style="width: 100%">Senden</button>
+        </form>
+    </section>
 
-      <label for="anzahlPortionen2">Anzahl der Portionen:</label>
-      <div class="slider-description">Anzahl der Portionen, in die das Rezept aufgeteilt wird.</div>
-      <input type="number" id="anzahlPortionen2" name="anzahlPortionen2" min="1" max="100" value="12">
-      <input type="range" id="anzahlPortionenSlider2" name="anzahlPortionenSlider2" min="1" max="100" value="12">
-      <div class="slider-value">
-        <span class="min-value"></span>
-        <span class="max-value"></span>
-      </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Green Bean</h3>
+                <p>Cooking with Benefits.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Rechtliches</h4>
+                <a href="policy.html">Datenschutz</a>
+                <a href="policy.html">Impressum</a>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+            &copy; 2024 Green Bean. Bitte konsumiere verantwortungsbewusst.
+        </div>
+    </footer>
 
-      <button onclick="berechnen2()" class="berechnen-button">Berechnen</button>
+    <script>
+        // --- INIT ICONS ---
+        lucide.createIcons();
 
-      <div id="ergebnis-box2" style="display: none;"> 
-        <h3 style="color: #6aa84f;">Dosierung</h3>
-        <p>THC per Rezept (in mg): <span id="thcRezept2"></span></p>
-        <p>THC pro Portion (in mg): <span id="thcPortion2"></span></p>
-      </div>
-    </div>
-  </section>
+        // --- MOBILE MENU TOGGLE ---
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-  <footer>
-    <div class="row">
-      <div class="col-md-4">
-        <a href="contact.html">hello@greenbean</a>
-      </div>
-      <div class="col-md-4">
-        <p class="copyright">&copy; 2024 Green Bean</p>
-      </div>
-      <div class="col-md-4">
-        <a href="policy.html">Policy & Impressum</a>
-      </div>
-    </div>
-  </footer>
+        // --- TABS LOGIC ---
+        function openTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.recipe-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected
+            document.getElementById(tabName).classList.add('active');
+            // Activate button (simple check via event would be cleaner but this works for inline)
+            event.target.classList.add('active');
+        }
 
-  <script src="script.js"></script> 
+        // --- CALCULATOR LOGIC ---
+        function syncSlider(sliderId, val) {
+            document.getElementById(sliderId).value = val;
+        }
+
+        function calculate() {
+            // Get values
+            let weed = parseFloat(document.getElementById('weedAmount').value);
+            let thc = parseFloat(document.getElementById('thcPercent').value);
+            let fat = parseFloat(document.getElementById('fatAmount').value);
+
+            // Sync Numbers
+            document.getElementById('weedAmountNum').value = weed;
+            document.getElementById('thcPercentNum').value = thc;
+            document.getElementById('fatAmountNum').value = fat;
+
+            // Formula: (Grams * 1000) * (THC% / 100) * Efficiency (approx 0.6)
+            // Efficiency loss happens during decarbing and infusion.
+            const efficiency = 0.6; 
+            
+            let totalThcMg = (weed * 1000) * (thc / 100) * efficiency;
+            let mgPerMl = totalThcMg / fat;
+            let mgPerTsp = mgPerMl * 5; // 1 tsp = approx 5ml
+
+            // Update UI
+            document.getElementById('resultMg').innerText = totalThcMg.toFixed(0) + " mg THC Gesamt";
+            document.getElementById('resultTsp').innerText = mgPerTsp.toFixed(1);
+        }
+
+        // Init calculation on load
+        calculate();
+    </script>
 </body>
 </html>
