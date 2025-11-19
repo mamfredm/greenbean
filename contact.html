@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontaktieren Sie Green Bean.">
+    <title>Green Bean - Kontakt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i data-lucide="sprout"></i> Green Bean</a>
+            <button class="menu-toggle"><i data-lucide="menu"></i></button>
+            <ul class="nav-links">
+                <li><a href="basiswissen.html">Basiswissen</a></li>
+                <li><a href="grundrezepte.html">Rezepte</a></li>
+                <li><a href="index.html#calculator">Rechner</a></li>
+                <li><a href="contact.html" class="active">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 3rem 1.5rem;">
+        <h1>Kontaktiere <span class="highlight">Green Bean</span></h1>
+        <p>Wir freuen uns auf deine Nachricht, Anregungen oder Fragen!</p>
+    </section>
+
+    <section>
+        <!-- Kontaktformular im neuen Card-Look -->
+        <div class="card" style="max-width: 600px; margin: 0 auto; border-top-color: var(--primary);">
+            <form id="contactForm">
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="name" style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Name</label>
+                    <input type="text" id="name" name="name" required 
+                           style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+                    <input type="email" id="email" name="email" required 
+                           style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="subject" style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Betreff</label>
+                    <input type="text" id="subject" name="subject" required 
+                           style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="message" style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Nachricht</label>
+                    <textarea id="message" name="message" rows="6" required 
+                              style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit;"></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Nachricht senden</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div><h3>Green Bean</h3></div>
+            <div class="footer-links">
+                <a href="policy.html">Datenschutz</a>
+                <a href="policy.html">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Optional: Falls du deine script.js Logik hier inline haben möchtest
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Danke für deine Nachricht! (Dies ist eine Demo - bitte verknüpfe dein Backend Skript)");
+            // Hier könntest du deine fetch() Logik einfügen
+        });
+    </script>
+</body>
+</html>

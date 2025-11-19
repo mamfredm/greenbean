@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datenschutz und Impressum von Green Bean.">
+    <title>Green Bean - Policy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i data-lucide="sprout"></i> Green Bean</a>
+            <button class="menu-toggle"><i data-lucide="menu"></i></button>
+            <ul class="nav-links">
+                <li><a href="basiswissen.html">Basiswissen</a></li>
+                <li><a href="grundrezepte.html">Rezepte</a></li>
+                <li><a href="index.html#calculator">Rechner</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1>Rechtliches</h1>
+        
+        <div class="card" style="margin-bottom: 3rem; border-top-color: #333;">
+            <h2 id="impressum" style="color: #333; text-align: left;">Impressum</h2>
+            <p>Angaben gemäß § 5 TMG</p>
+            
+            <h3>Kontakt</h3>
+            <p>
+                <strong>Telefon:</strong> +351 911 084 445<br>
+                <strong>E-Mail:</strong> hello@greenbean (Bitte vervollständigen)
+            </p>
+            
+            <h3>Verantwortlich für den Inhalt</h3>
+            <p>Green Bean Redaktion<br>Adresse...</p>
+        </div>
+
+        <div class="card" style="border-top-color: #333;">
+            <h2 id="datenschutz" style="color: #333; text-align: left;">Datenschutzerklärung</h2>
+            
+            <h3>1. Datenschutz auf einen Blick</h3>
+            <p><strong>Allgemeine Hinweise</strong><br>
+            Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+            
+            <h3>2. Hosting</h3>
+            <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter: <strong>googiehost.com</strong></p>
+
+            <h3>3. Datenerfassung auf dieser Website</h3>
+            <p><strong>Cookies</strong><br>
+            Unsere Internetseiten verwenden so genannte „Cookies“. Cookies sind kleine Textdateien und richten auf Ihrem Endgerät keinen Schaden an.</p>
+            
+            <p><strong>Kontaktformular</strong><br>
+            Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
+
+            <h3>4. Analyse-Tools und Tools von Drittanbietern</h3>
+            <p>Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit sogenannten Analyseprogrammen.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div><h3>Green Bean</h3></div>
+            <div class="footer-links">
+                <a href="policy.html">Datenschutz</a>
+                <a href="policy.html">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

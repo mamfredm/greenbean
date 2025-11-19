@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rezepte für Cannabutter, Canna-Öl und mehr.">
+    <title>Green Bean - Rezepte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i data-lucide="sprout"></i> Green Bean</a>
+            <button class="menu-toggle"><i data-lucide="menu"></i></button>
+            <ul class="nav-links">
+                <li><a href="basiswissen.html">Basiswissen</a></li>
+                <li><a href="grundrezepte.html" class="active">Rezepte</a></li>
+                <li><a href="index.html#calculator">Rechner</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Werbeplatz Leaderboard -->
+    <div class="ad-slot ad-leaderboard ad-label"><span>Werbung</span></div>
+
+    <section>
+        <h1>Grundrezepte</h1>
+        <p>Hier findest du die Anleitungen für die wichtigsten Basiszutaten.</p>
+
+        <div style="margin-top: 2rem;">
+            <!-- Rezept: Cannabutter -->
+            <div class="card" style="margin-bottom: 2rem; border-top-color: #E6B800;">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <h2>Cannabutter</h2>
+                        <p>Der Klassiker für alles Gebackene.</p>
+                    </div>
+                    <i data-lucide="cookie" size="40" style="color:#E6B800;"></i>
+                </div>
+                
+                <div style="background: #f9f9f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <strong>Zutaten:</strong>
+                    <ul>
+                        <li>250g Butter</li>
+                        <li>5-10g Cannabis (decarboxyliert)</li>
+                        <li>2 Tassen Wasser</li>
+                    </ul>
+                </div>
+
+                <!-- Werbeplatz Rechteck (Float rechts auf Desktop) -->
+                <div class="ad-slot ad-rectangle ad-label"><span>Werbung</span></div>
+
+                <h3>Anleitung (Topf-Methode)</h3>
+                <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Wasser und Butter in einem Topf bei mittlerer Hitze schmelzen.</li>
+                    <li>Das grob zerkleinerte Cannabis hinzufügen.</li>
+                    <li>Temperatur reduzieren! Es darf nur ganz leicht köcheln (simmern).</li>
+                    <li><strong>3 bis 4 Stunden</strong> köcheln lassen. Rühre alle 30 Minuten um und füge Wasser hinzu, falls zu viel verdampft.</li>
+                    <li>Ein Sieb mit einem Käsetuch (oder sauberen Geschirrtuch) über eine Schüssel legen.</li>
+                    <li>Die flüssige Mischung vorsichtig durch das Tuch gießen. Nicht zu fest auspressen (sonst kommen Bitterstoffe mit).</li>
+                    <li>Die Schüssel über Nacht in den Kühlschrank stellen.</li>
+                    <li>Die Butter wird oben fest, das Wasser bleibt unten. Hebe den Butterblock ab und kippe das Wasser weg.</li>
+                </ol>
+            </div>
+
+            <!-- Werbeplatz Banner -->
+            <div class="ad-slot ad-banner-full ad-label"><span>Werbung</span></div>
+
+            <!-- Rezept: Kokosöl -->
+            <div class="card" style="margin-bottom: 2rem; border-top-color: #38761d;">
+                 <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <h2>Canna-Kokosöl</h2>
+                        <p>Vegan, potent und lange haltbar.</p>
+                    </div>
+                    <i data-lucide="leaf" size="40" style="color:#38761d;"></i>
+                </div>
+
+                <div style="background: #f9f9f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <strong>Zutaten:</strong>
+                    <ul>
+                        <li>250ml Kokosöl</li>
+                        <li>5-10g Cannabis (decarboxyliert)</li>
+                        <li>Optional: 1 TL Sojalecithin</li>
+                    </ul>
+                </div>
+
+                <h3>Anleitung (Wasserbad / Bain-Marie)</h3>
+                <p>Da Kokosöl kein Wasser zur Trennung braucht, nutzen wir ein Wasserbad, damit es nicht anbrennt.</p>
+                <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Fülle einen großen Topf mit Wasser und erhitze es.</li>
+                    <li>Gib Kokosöl und Cannabis in ein Hitzebeständiges Glas (z.B. Einmachglas) oder eine Metallschüssel, die auf dem Topf sitzt.</li>
+                    <li>Stelle das Glas ins Wasserbad (Achtung: Kein Wasser ins Öl kommen lassen!).</li>
+                    <li>Lasse es für <strong>3 bis 6 Stunden</strong> ziehen.</li>
+                    <li>Abseihen durch ein Tuch direkt in das Aufbewahrungsglas.</li>
+                    <li>Abkühlen lassen. Fertig.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div><h3>Green Bean</h3></div>
+            <div class="footer-links">
+                <a href="policy.html">Datenschutz</a>
+                <a href="policy.html">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

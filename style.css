@@ -1,0 +1,164 @@
+/* --- GREEN BEAN DESIGN SYSTEM --- */
+
+:root {
+    --primary: #6aa84f;
+    --primary-dark: #4CAF50;
+    --secondary: #38761d;
+    --text: #333;
+    --text-light: #666;
+    --bg: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+    --ad-bg: #e9ecef; /* Farbe für Werbeplatzhalter */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* --- TYPOGRAFIE --- */
+h1, h2, h3 { line-height: 1.2; margin-bottom: 1rem; }
+h1 { font-size: 2.5rem; font-weight: 700; color: var(--text); }
+h2 { font-size: 2rem; color: var(--secondary); text-align: center; margin-bottom: 2rem; }
+h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+p { margin-bottom: 1rem; color: var(--text-light); }
+
+.highlight { color: var(--primary); }
+.text-center { text-align: center; }
+
+/* --- BUTTONS --- */
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+.btn:hover { background: var(--secondary); transform: translateY(-2px); }
+.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+
+/* --- HEADER & NAV --- */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+/* --- LAYOUTS --- */
+section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero {
+    text-align: center;
+    padding: 6rem 1.5rem;
+    background: linear-gradient(135deg, #f0f9eb 0%, #ffffff 100%);
+}
+
+/* --- CARDS & GRIDS --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+    border-top: 4px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.card:hover { transform: translateY(-5px); }
+.card-icon { color: var(--primary); margin-bottom: 1rem; }
+.card-footer { margin-top: auto; padding-top: 1rem; }
+
+/* --- ADVERTISING SLOTS (WERBUNG) --- */
+.ad-slot {
+    background-color: var(--ad-bg);
+    border: 1px dashed #ccc;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.9rem;
+    margin: 2rem auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Standard Banner Sizes */
+.ad-leaderboard { max-width: 728px; height: 90px; }
+.ad-rectangle { max-width: 300px; height: 250px; float: right; margin-left: 2rem; margin-bottom: 1rem;}
+.ad-banner-full { width: 100%; height: 150px; }
+
+/* Label for Ad Slots */
+.ad-label::before {
+    content: "Werbung / Advertisement";
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #aaa;
+}
+
+/* --- FOOTER --- */
+footer { background: var(--text); color: var(--white); padding: 3rem 1.5rem; margin-top: auto; }
+.footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+.footer-links a { color: #aaa; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+.footer-links a:hover { color: var(--white); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .nav-links.active { display: flex; }
+    .menu-toggle { display: block; }
+    h1 { font-size: 2rem; }
+    
+    /* Ads mobile adjustment */
+    .ad-rectangle { float: none; margin: 2rem auto; }
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grundlagen der Cannabis-Küche: Decarboxylierung, Fettlöslichkeit und Methoden erklärt.">
+    <title>Green Bean - Basiswissen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i data-lucide="sprout"></i> Green Bean</a>
+            <button class="menu-toggle"><i data-lucide="menu"></i></button>
+            <ul class="nav-links">
+                <li><a href="basiswissen.html" class="active">Basiswissen</a></li>
+                <li><a href="grundrezepte.html">Rezepte</a></li>
+                <li><a href="index.html#calculator">Rechner</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1>Basiswissen & Methoden</h1>
+        <p>Bevor der Herd angeht, müssen wir ein paar chemische Grundlagen verstehen.</p>
+        
+        <!-- Werbeplatz im Content (Rectangle) -->
+        <div class="ad-slot ad-rectangle ad-label">
+            <span>Werbung</span>
+        </div>
+
+        <article style="margin-top: 3rem;">
+            <h2><i data-lucide="flame"></i> Decarboxylierung</h2>
+            <p>Rohes Cannabis enthält THCA, welches nicht psychoaktiv ist. Um es "scharf" zu schalten, brauchen wir Hitze. Dieser Prozess nennt sich Decarboxylierung.</p>
+            <div style="background: #fff; padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary); margin: 1rem 0;">
+                <h3>Die Faustregel</h3>
+                <p><strong>Temperatur:</strong> 105°C - 115°C</p>
+                <p><strong>Zeit:</strong> 30 - 45 Minuten</p>
+                <p>Zerkleinere die Blüten grob, verteile sie auf einem Backblech und ab in den Ofen.</p>
+            </div>
+        </article>
+
+        <!-- Werbeplatz Banner Full Width -->
+        <div class="ad-slot ad-banner-full ad-label">
+            <span>Werbung (Banner)</span>
+        </div>
+
+        <article style="margin-top: 3rem;">
+            <h2><i data-lucide="droplets"></i> Butter oder Öl?</h2>
+            <p>Cannabinoide sind fettlöslich. Aber welches Fett ist das Beste?</p>
+            
+            <div class="info-grid">
+                <div class="card">
+                    <h3>Butter</h3>
+                    <p><strong>Vorteil:</strong> Bester Geschmack für Backwaren (Kekse, Brownies).</p>
+                    <p><strong>Nachteil:</strong> Enthält Wasser & Milchfeststoffe, kann schneller anbrennen.</p>
+                </div>
+                <div class="card">
+                    <h3>Kokosöl</h3>
+                    <p><strong>Vorteil:</strong> Sehr hoher Fettgehalt, bindet THC extrem gut. Vegan.</p>
+                    <p><strong>Nachteil:</strong> Eigengeschmack (außer man kauft raffiniertes).</p>
+                </div>
+                <div class="card">
+                    <h3>Olivenöl</h3>
+                    <p><strong>Vorteil:</strong> Gesund, super für herzhafte Küche (Salate, Pasta).</p>
+                    <p><strong>Nachteil:</strong> Darf nicht zu hoch erhitzt werden.</p>
+                </div>
+            </div>
+        </article>
+
+        <article style="margin-top: 3rem;">
+            <h2><i data-lucide="settings"></i> Methoden</h2>
+            <p>Wie kommt das THC ins Fett? Hier sind die gängigsten Wege.</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 1.5rem;">
+                    <h3>1. Kochtopf (Wasserbad)</h3>
+                    <p>Die Einsteiger-Methode. Wasser und Fett in einen Topf, Gras dazu, köcheln lassen. Durch das Wasser verbrennt das Fett nicht über 100°C.</p>
+                </li>
+                <li style="margin-bottom: 1.5rem;">
+                    <h3>2. Slow Cooker</h3>
+                    <p>Die gemütliche Methode. "Set and forget". Einfach alles rein und 4-6 Stunden laufen lassen.</p>
+                </li>
+                <li style="margin-bottom: 1.5rem;">
+                    <h3>3. Sous-Vide</h3>
+                    <p>Die Profi-Methode. Im Vakuumbeutel im Wasserbad. Kein Geruch in der Küche und perfekte Temperaturkontrolle.</p>
+                </li>
+            </ul>
+        </article>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div><h3>Green Bean</h3></div>
+            <div class="footer-links">
+                <a href="policy.html">Datenschutz</a>
+                <a href="policy.html">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
